@@ -111,8 +111,8 @@ evologic-ga-visualizer/
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/pavani0959/evologic-ga-visualizer-.git
-   cd evologic-ga-visualizer-
+   git clone https://github.com/pavani0959/evologic-ga-visualizer.git
+   cd evologic-ga-visualizer
    ```
 
 2. **Install project dependencies:**
@@ -140,7 +140,7 @@ evologic-ga-visualizer/
 1. Push your repository to GitHub.
 2. Sign in to **[Vercel](https://vercel.com)** using your GitHub account.
 3. Click **Add New...** $\rightarrow$ **Project**.
-4. Select `evologic-ga-visualizer-` from your repository list and click **Import**.
+4. Select `evologic-ga-visualizer` from your repository list and click **Import**.
 5. Framework preset will automatically detect **Vite**.
 6. Click **Deploy**. Your application will be live with free global CDN and SSL within seconds!
 
