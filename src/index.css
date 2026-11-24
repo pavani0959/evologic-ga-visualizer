@@ -220,3 +220,13 @@ html.light ::selection {
   background-color: #b6e3ff;
   color: #0550ae;
 }
+
+/* Utility to hide scrollbars while maintaining scroll functionality */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+

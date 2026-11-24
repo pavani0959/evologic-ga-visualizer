@@ -6,22 +6,22 @@ export function ChromosomeInspector({ gaState, config, contextData, isStoryMode 
   const population = gaState.population || [];
 
   return (
-    <div className="flex flex-col h-full bg-[#161b22] rounded border border-[#30363d] p-3 text-xs">
+    <div className="flex flex-col h-full bg-[#161b22] rounded border border-[#30363d] p-2.5 sm:p-3 text-xs">
       {/* Header */}
-      <div className="flex items-center justify-between pb-2 mb-2 border-b border-[#30363d]">
-        <div className="flex items-center gap-2">
-          <Eye className="w-4 h-4 text-[#58a6ff]" />
+      <div className="flex flex-wrap items-center justify-between gap-1.5 pb-2 mb-2 border-b border-[#30363d]">
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          <Eye className="w-4 h-4 text-[#58a6ff] flex-shrink-0" />
           <span className="font-bold text-[#f0f6fc] text-xs">
             Population Chromosome Matrix
           </span>
         </div>
-        <span className="text-[11px] text-[#8b949e] font-mono">
+        <span className="text-[10px] sm:text-[11px] text-[#8b949e] font-mono">
           Ranked by Fitness ({population.length} Candidates)
         </span>
       </div>
 
       {/* Population List */}
-      <div className="flex-1 overflow-y-auto pr-1 space-y-1.5 max-h-[380px]">
+      <div className="flex-1 overflow-y-auto pr-0.5 sm:pr-1 space-y-1.5 max-h-[380px]">
         {population.map((ind, idx) => {
           const isTop = idx === 0;
           const isElite = ind.isElite;
@@ -40,7 +40,7 @@ export function ChromosomeInspector({ gaState, config, contextData, isStoryMode 
                   : 'bg-[#0d1117] border-[#30363d] hover:border-[#8b949e]'
               }`}
             >
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between flex-wrap gap-1">
                 <div className="flex items-center gap-2">
                   <span className="font-mono font-bold text-[#8b949e] text-xs">
                     #{idx + 1}
@@ -62,7 +62,7 @@ export function ChromosomeInspector({ gaState, config, contextData, isStoryMode 
                   )}
                 </div>
 
-                <div className="flex items-center gap-3 font-mono text-[11px]">
+                <div className="flex items-center gap-2 sm:gap-3 font-mono text-[10px] sm:text-[11px]">
                   <span className="text-[#8b949e]">
                     Fit: <strong className={isTop ? 'text-[#3fb950] font-bold' : 'text-[#f0f6fc]'}>{ind.fitness}</strong>
                   </span>
@@ -73,7 +73,7 @@ export function ChromosomeInspector({ gaState, config, contextData, isStoryMode 
               </div>
 
               {/* Gene Visualization */}
-              <div className="flex items-center gap-0.5 overflow-x-auto py-0.5 scrollbar-none font-mono">
+              <div className="flex items-center gap-0.5 overflow-x-auto py-0.5 scrollbar-none font-mono min-w-0 max-w-full">
                 {ind.genes.map((gene, gIdx) => {
                   let blockStyle = 'bg-[#21262d] text-[#c9d1d9] border border-[#30363d]';
                   let label = gene;

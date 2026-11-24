@@ -145,60 +145,65 @@ export function SimulatorSection({
       };
 
   return (
-    <div className="w-full max-w-[1540px] mx-auto py-4 px-3 sm:px-6 flex-1 flex flex-col gap-3.5">
+    <div className="w-full max-w-[1540px] mx-auto py-3 sm:py-4 px-2.5 sm:px-6 flex-1 flex flex-col gap-3 sm:gap-3.5">
 
       {/* 1. TOP BAR: Problem Selector & Generation Status */}
-      <div className="bg-[#161b22] border border-[#30363d] rounded-xl p-3 shadow-sm flex flex-wrap items-center justify-between gap-3">
+      <div className="bg-[#161b22] border border-[#30363d] rounded-xl p-2.5 sm:p-3 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-2.5 sm:gap-3">
         {/* Problem Selector */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-wrap">
           <span className="text-xs font-semibold text-[#8b949e]">Problem:</span>
-          <div className="inline-flex rounded-lg border border-[#30363d] p-0.5 bg-[#0d1117] text-xs">
+          <div className="inline-flex max-w-full overflow-x-auto scrollbar-none rounded-lg border border-[#30363d] p-0.5 bg-[#0d1117] text-xs">
             <button
               onClick={() => changeProblem && changeProblem('tsp')}
-              className={`px-3 py-1 rounded-md font-medium transition-colors cursor-pointer ${
+              className={`px-2.5 sm:px-3 py-1 rounded-md font-medium whitespace-nowrap transition-colors cursor-pointer text-xs ${
                 problemId === 'tsp'
                   ? 'bg-[#1f6feb] text-white font-semibold shadow-sm'
                   : 'text-[#8b949e] hover:text-[#f0f6fc]'
               }`}
             >
-              Travelling Salesperson (TSP)
+              <span className="hidden sm:inline">Travelling Salesperson (TSP)</span>
+              <span className="sm:hidden">TSP</span>
             </button>
             <button
               onClick={() => changeProblem && changeProblem('funcopt')}
-              className={`px-3 py-1 rounded-md font-medium transition-colors cursor-pointer ${
+              className={`px-2.5 sm:px-3 py-1 rounded-md font-medium whitespace-nowrap transition-colors cursor-pointer text-xs ${
                 problemId === 'funcopt'
                   ? 'bg-[#1f6feb] text-white font-semibold shadow-sm'
                   : 'text-[#8b949e] hover:text-[#f0f6fc]'
               }`}
             >
-              Function Optimization
+              <span className="hidden sm:inline">Function Optimization</span>
+              <span className="sm:hidden">Function Opt</span>
             </button>
             <button
               onClick={() => changeProblem && changeProblem('knapsack')}
-              className={`px-3 py-1 rounded-md font-medium transition-colors cursor-pointer ${
+              className={`px-2.5 sm:px-3 py-1 rounded-md font-medium whitespace-nowrap transition-colors cursor-pointer text-xs ${
                 problemId === 'knapsack'
                   ? 'bg-[#1f6feb] text-white font-semibold shadow-sm'
                   : 'text-[#8b949e] hover:text-[#f0f6fc]'
               }`}
             >
-              0/1 Knapsack
+              <span className="hidden sm:inline">0/1 Knapsack</span>
+              <span className="sm:hidden">Knapsack</span>
             </button>
           </div>
         </div>
 
         {/* Current Generation and Phase */}
-        <div className="flex items-center gap-2 font-mono text-xs">
-          <div className="bg-[#0d1117] border border-[#30363d] px-3 py-1 rounded-md flex items-center gap-2 text-[#c9d1d9]">
-            <span className="w-2 h-2 rounded-full bg-[#1f6feb] animate-pulse"></span>
-            <span>Gen <strong className="text-[#f0f6fc]">{gaState.generation}</strong> / {params.maxGenerations || 100}</span>
-            <span className="text-[#58a6ff] font-bold">· Phase {gaState.phaseNumber || (gaState.stepIndex + 1)}/7 ({gaState.currentStep || 'INITIAL'})</span>
+        <div className="flex items-center gap-2 font-mono text-xs flex-wrap">
+          <div className="w-full sm:w-auto bg-[#0d1117] border border-[#30363d] px-2.5 sm:px-3 py-1 rounded-md flex items-center justify-between sm:justify-start gap-2 text-[#c9d1d9]">
+            <div className="flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-[#1f6feb] animate-pulse"></span>
+              <span>Gen <strong className="text-[#f0f6fc]">{gaState.generation}</strong> / {params.maxGenerations || 100}</span>
+            </div>
+            <span className="text-[#58a6ff] font-bold text-[11px] sm:text-xs">· Phase {gaState.phaseNumber || (gaState.stepIndex + 1)}/7 ({gaState.currentStep || 'INITIAL'})</span>
           </div>
         </div>
       </div>
 
       {/* 2. GENERATION COMPARISON & IMPROVEMENT SHOWCASE */}
-      <div className="bg-[#161b22] border border-[#30363d] rounded-xl p-3.5 shadow-sm">
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div className="bg-[#161b22] border border-[#30363d] rounded-xl p-3 sm:p-3.5 shadow-sm">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-2.5 sm:gap-3">
 
           {/* Left: Start (Gen 0) */}
           <div className="w-full sm:w-1/3 bg-[#0d1117] border border-[#30363d] rounded-lg p-2.5 flex items-center justify-between">
@@ -214,13 +219,13 @@ export function SimulatorSection({
           </div>
 
           {/* Middle: Arrow & Improvement */}
-          <div className="flex flex-col items-center justify-center px-2 text-center">
+          <div className="flex sm:flex-col items-center justify-center px-2 py-1 sm:py-0 text-center gap-2 sm:gap-0">
             <div className="flex items-center gap-1.5 text-xs font-bold text-[#3fb950] font-mono">
               <Sparkles className="w-3.5 h-3.5 text-[#d29922]" />
               <span>{improvementPercent} Better</span>
-              <ArrowRight className="w-4 h-4 text-[#3fb950]" />
+              <ArrowRight className="w-4 h-4 text-[#3fb950] hidden sm:inline" />
             </div>
-            <span className="text-[11px] text-[#8b949e] mt-0.5">
+            <span className="text-[11px] text-[#8b949e] sm:mt-0.5">
               {improvementText}
             </span>
           </div>
@@ -248,19 +253,19 @@ export function SimulatorSection({
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-3.5 items-start">
 
         {/* LEFT COLUMN: Controls & Settings (4 cols) */}
-        <div className="lg:col-span-4 flex flex-col gap-3.5">
+        <div className="lg:col-span-4 flex flex-col gap-3.5 min-w-0">
 
           {/* Card 1: Controls (Play, Step, Reset, Speed) */}
-          <div className="bg-[#161b22] border border-[#30363d] rounded-xl p-3.5 shadow-sm space-y-3">
+          <div className="bg-[#161b22] border border-[#30363d] rounded-xl p-3 sm:p-3.5 shadow-sm space-y-3">
             <div className="flex items-center justify-between pb-2 border-b border-[#30363d] text-xs">
               <span className="font-bold text-[#f0f6fc]">Controls</span>
-              <div className="flex items-center gap-2">
-                <span className="text-[11px] font-mono text-[#58a6ff] uppercase font-semibold">
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <span className="text-[10px] sm:text-[11px] font-mono text-[#58a6ff] uppercase font-semibold">
                   Phase {gaState.phaseNumber || (gaState.stepIndex + 1)}/7: {gaState.currentStep || 'INITIAL'}
                 </span>
                 <button
                   onClick={handleToggleVoice}
-                  className={`px-2 py-0.5 rounded text-[11px] font-medium border flex items-center gap-1 transition-colors cursor-pointer ${
+                  className={`px-1.5 sm:px-2 py-0.5 rounded text-[10px] sm:text-[11px] font-medium border flex items-center gap-1 transition-colors cursor-pointer ${
                     isSpeaking
                       ? 'bg-[#1f6feb]/20 text-[#58a6ff] border-[#1f6feb] animate-pulse'
                       : 'bg-[#21262d] text-[#8b949e] hover:text-[#f0f6fc] border-[#30363d]'
@@ -305,42 +310,42 @@ export function SimulatorSection({
             </button>
 
             {/* Step, Reset & New Run buttons */}
-            <div className="grid grid-cols-4 gap-1.5 text-xs">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 text-xs">
               <button
                 onClick={stepForward}
                 disabled={isPlaying}
-                className="py-1.5 px-1.5 rounded-md bg-[#1f6feb] hover:bg-[#388bfd] text-white font-semibold flex items-center justify-center gap-1 transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed shadow-sm"
+                className="py-1.5 px-1.5 rounded-md bg-[#1f6feb] hover:bg-[#388bfd] text-white font-semibold flex items-center justify-center gap-1 transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed shadow-sm text-xs"
                 title="Execute next single phase (1 of 7)"
               >
-                <SkipForward className="w-3.5 h-3.5" />
+                <SkipForward className="w-3.5 h-3.5 flex-shrink-0" />
                 <span>Step</span>
               </button>
 
               <button
                 onClick={stepGeneration}
                 disabled={isPlaying}
-                className="py-1.5 px-1.5 rounded-md bg-[#21262d] hover:bg-[#30363d] text-[#c9d1d9] border border-[#30363d] font-medium flex items-center justify-center gap-1 transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+                className="py-1.5 px-1.5 rounded-md bg-[#21262d] hover:bg-[#30363d] text-[#c9d1d9] border border-[#30363d] font-medium flex items-center justify-center gap-1 transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed text-xs"
                 title="Run 1 full generation"
               >
-                <FastForward className="w-3.5 h-3.5" />
+                <FastForward className="w-3.5 h-3.5 flex-shrink-0" />
                 <span>Next Gen</span>
               </button>
 
               <button
                 onClick={() => resetGA()}
-                className="py-1.5 px-1.5 rounded-md bg-[#21262d] hover:bg-[#30363d] text-[#8b949e] hover:text-[#f85149] border border-[#30363d] font-medium flex items-center justify-center gap-1 transition-colors cursor-pointer"
+                className="py-1.5 px-1.5 rounded-md bg-[#21262d] hover:bg-[#30363d] text-[#8b949e] hover:text-[#f85149] border border-[#30363d] font-medium flex items-center justify-center gap-1 transition-colors cursor-pointer text-xs"
                 title="Reset to Generation 0 (Replay current run from identical starting solution)"
               >
-                <RotateCcw className="w-3.5 h-3.5" />
+                <RotateCcw className="w-3.5 h-3.5 flex-shrink-0" />
                 <span>Reset</span>
               </button>
 
               <button
                 onClick={() => newRandomRun && newRandomRun()}
-                className="py-1.5 px-1.5 rounded-md bg-[#21262d] hover:bg-[#30363d] text-[#8b949e] hover:text-[#58a6ff] border border-[#30363d] font-medium flex items-center justify-center gap-1 transition-colors cursor-pointer"
+                className="py-1.5 px-1.5 rounded-md bg-[#21262d] hover:bg-[#30363d] text-[#8b949e] hover:text-[#58a6ff] border border-[#30363d] font-medium flex items-center justify-center gap-1 transition-colors cursor-pointer text-xs"
                 title="Generate a brand-new random starting population"
               >
-                <Shuffle className="w-3.5 h-3.5 text-[#d29922]" />
+                <Shuffle className="w-3.5 h-3.5 text-[#d29922] flex-shrink-0" />
                 <span>New Run</span>
               </button>
             </div>
@@ -348,10 +353,10 @@ export function SimulatorSection({
             {/* Speed slider */}
             <div className="flex items-center justify-between text-xs text-[#8b949e] pt-1.5 border-t border-[#30363d]/60 font-mono">
               <div className="flex items-center gap-1.5">
-                <Gauge className="w-3.5 h-3.5 text-[#58a6ff]" />
+                <Gauge className="w-3.5 h-3.5 text-[#58a6ff] flex-shrink-0" />
                 <span>Speed:</span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 flex-1 max-w-[200px] justify-end">
                 <input
                   type="range"
                   min="50"
@@ -359,7 +364,7 @@ export function SimulatorSection({
                   step="25"
                   value={1050 - (speedMs || 300)}
                   onChange={(e) => setSpeedMs(1050 - Number(e.target.value))}
-                  className="w-24 h-1.5 bg-[#30363d] rounded cursor-pointer"
+                  className="w-20 sm:w-24 h-1.5 bg-[#30363d] rounded cursor-pointer"
                 />
                 <span className="w-12 text-right text-[#c9d1d9] font-bold">
                   {speedMs || 300}ms
@@ -383,7 +388,7 @@ export function SimulatorSection({
           )}
 
           {/* Card 3: Settings (Population Size, Crossover, Mutation, Selection) */}
-          <div className="bg-[#161b22] border border-[#30363d] rounded-xl p-3.5 shadow-sm space-y-3">
+          <div className="bg-[#161b22] border border-[#30363d] rounded-xl p-3 sm:p-3.5 shadow-sm space-y-3">
             <div className="flex items-center justify-between pb-2 border-b border-[#30363d] text-xs">
               <span className="font-bold text-[#f0f6fc]">Settings</span>
               <button
@@ -517,20 +522,20 @@ export function SimulatorSection({
         </div>
 
         {/* RIGHT COLUMN: Visualizer Stage & Tabs (8 cols) */}
-        <div className="lg:col-span-8 flex flex-col gap-3.5">
+        <div className="lg:col-span-8 flex flex-col gap-3.5 min-w-0">
 
           {/* Visualizer Stage */}
           <div className="bg-[#161b22] border border-[#30363d] rounded-xl overflow-hidden flex flex-col shadow-sm">
-            <div className="px-4 py-2 bg-[#1c2128] border-b border-[#30363d] flex items-center justify-between text-xs">
-              <span className="font-bold text-[#f0f6fc]">
+            <div className="px-3 sm:px-4 py-2 bg-[#1c2128] border-b border-[#30363d] flex items-center justify-between text-xs">
+              <span className="font-bold text-[#f0f6fc] truncate">
                 Visualizer: {config.title}
               </span>
-              <span className="text-[11px] font-mono text-[#8b949e]">
+              <span className="text-[11px] font-mono text-[#8b949e] hidden sm:inline">
                 {problemId === 'tsp' ? 'Click canvas to add cities' : problemId === 'knapsack' ? 'Item packing binary bits' : 'Continuous fitness landscape'}
               </span>
             </div>
 
-            <div className="p-3 bg-[#0d1117] flex-1 flex flex-col justify-center min-h-[360px]">
+            <div className="p-2.5 sm:p-3 bg-[#0d1117] flex-1 flex flex-col justify-center min-h-[300px] sm:min-h-[360px]">
               {problemId === 'tsp' && (
                 <TSPVisualizer
                   theme={theme}
@@ -556,55 +561,56 @@ export function SimulatorSection({
             <div className="flex items-center border-b border-[#30363d] bg-[#1c2128] px-2 py-1 gap-1 overflow-x-auto scrollbar-none">
               <button
                 onClick={() => setActiveTab('chromosomes')}
-                className={`flex items-center gap-1.5 py-1.5 px-3 text-xs rounded-md transition-colors cursor-pointer ${
+                className={`flex items-center gap-1.5 py-1.5 px-2.5 sm:px-3 text-xs rounded-md whitespace-nowrap transition-colors cursor-pointer ${
                   activeTab === 'chromosomes'
                     ? 'bg-[#1f6feb] text-white font-semibold shadow-sm'
                     : 'text-[#8b949e] hover:text-[#f0f6fc]'
                 }`}
               >
-                <Eye className="w-3.5 h-3.5" />
+                <Eye className="w-3.5 h-3.5 flex-shrink-0" />
                 <span>Population ({gaState.population.length})</span>
               </button>
 
               <button
                 onClick={() => setActiveTab('wheel')}
-                className={`flex items-center gap-1.5 py-1.5 px-3 text-xs rounded-md transition-colors cursor-pointer ${
+                className={`flex items-center gap-1.5 py-1.5 px-2.5 sm:px-3 text-xs rounded-md whitespace-nowrap transition-colors cursor-pointer ${
                   activeTab === 'wheel'
                     ? 'bg-[#1f6feb] text-white font-semibold shadow-sm'
                     : 'text-[#8b949e] hover:text-[#f0f6fc]'
                 }`}
               >
-                <Disc className="w-3.5 h-3.5" />
+                <Disc className="w-3.5 h-3.5 flex-shrink-0" />
                 <span>Selection Wheel</span>
               </button>
 
               <button
                 onClick={() => setActiveTab('crossover')}
-                className={`flex items-center gap-1.5 py-1.5 px-3 text-xs rounded-md transition-colors cursor-pointer ${
+                className={`flex items-center gap-1.5 py-1.5 px-2.5 sm:px-3 text-xs rounded-md whitespace-nowrap transition-colors cursor-pointer ${
                   activeTab === 'crossover'
                     ? 'bg-[#1f6feb] text-white font-semibold shadow-sm'
                     : 'text-[#8b949e] hover:text-[#f0f6fc]'
                 }`}
               >
-                <Scissors className="w-3.5 h-3.5" />
-                <span>Crossover & Mutation</span>
+                <Scissors className="w-3.5 h-3.5 flex-shrink-0" />
+                <span className="hidden sm:inline">Crossover & Mutation</span>
+                <span className="sm:hidden">Crossover</span>
               </button>
 
               <button
                 onClick={() => setActiveTab('chart')}
-                className={`flex items-center gap-1.5 py-1.5 px-3 text-xs rounded-md transition-colors cursor-pointer ${
+                className={`flex items-center gap-1.5 py-1.5 px-2.5 sm:px-3 text-xs rounded-md whitespace-nowrap transition-colors cursor-pointer ${
                   activeTab === 'chart'
                     ? 'bg-[#1f6feb] text-white font-semibold shadow-sm'
                     : 'text-[#8b949e] hover:text-[#f0f6fc]'
                 }`}
               >
-                <LineChart className="w-3.5 h-3.5" />
+                <LineChart className="w-3.5 h-3.5 flex-shrink-0" />
                 <span>Fitness Chart</span>
               </button>
             </div>
 
             {/* Tab Body */}
-            <div className="p-3 max-h-[420px] overflow-y-auto bg-[#161b22]">
+            <div className="p-2.5 sm:p-3 max-h-[440px] overflow-y-auto bg-[#161b22]">
               {activeTab === 'chromosomes' && (
                 <ChromosomeInspector
                   gaState={gaState}
