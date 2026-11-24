@@ -92,9 +92,9 @@ export function StagesSection({ onNavigate }) {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Overview Banner */}
-      <div className="bg-[#161b22] border border-[#30363d] rounded-xl p-5 shadow-sm">
+      <div className="bg-[#161b22] border border-[#30363d] rounded-xl p-4 sm:p-5 shadow-sm">
         <h2 className="text-base sm:text-lg font-bold text-[#f0f6fc] mb-1">
           Genetic Algorithm Lifecycle
         </h2>
@@ -111,14 +111,14 @@ export function StagesSection({ onNavigate }) {
           return (
             <div
               key={s.num}
-              className="bg-[#161b22] border border-[#30363d] rounded-xl p-4 flex flex-col justify-between shadow-sm hover:border-[#58a6ff]/50 transition-colors"
+              className="bg-[#161b22] border border-[#30363d] rounded-xl p-3.5 sm:p-4 flex flex-col justify-between shadow-sm hover:border-[#58a6ff]/50 transition-colors"
             >
               <div>
                 {/* Stage header */}
                 <div className="flex items-center justify-between mb-2.5">
                   <div className="flex items-center gap-2">
                     <div
-                      className="w-7 h-7 rounded-lg flex items-center justify-center font-bold text-xs"
+                      className="w-7 h-7 rounded-lg flex items-center justify-center font-bold text-xs flex-shrink-0"
                       style={{ backgroundColor: `${s.color}20`, color: s.color }}
                     >
                       <Icon className="w-4 h-4" />
@@ -134,7 +134,7 @@ export function StagesSection({ onNavigate }) {
                   </div>
                   <button
                     onClick={() => handleToggleVoice(s)}
-                    className={`p-1.5 rounded-md border text-xs transition-colors cursor-pointer flex items-center gap-1 ${
+                    className={`p-1.5 rounded-md border text-xs transition-colors cursor-pointer flex items-center gap-1 flex-shrink-0 ${
                       speakingNum === s.num
                         ? 'bg-[#1f6feb]/20 text-[#58a6ff] border-[#1f6feb] animate-pulse'
                         : 'bg-[#0d1117] text-[#8b949e] hover:text-[#f0f6fc] border-[#30363d]'
@@ -168,9 +168,9 @@ export function StagesSection({ onNavigate }) {
               </div>
 
               {/* Formula Footer */}
-              <div className="pt-2 border-t border-[#30363d]/60 flex items-center justify-between text-[11px] font-mono text-[#58a6ff]">
+              <div className="pt-2 border-t border-[#30363d]/60 flex items-center justify-between text-[11px] font-mono text-[#58a6ff] gap-2 flex-wrap">
                 <span className="text-[#8b949e]">Formulation:</span>
-                <span className="bg-[#0d1117] px-2 py-0.5 rounded border border-[#30363d] text-[#3fb950] font-bold">
+                <span className="bg-[#0d1117] px-2 py-0.5 rounded border border-[#30363d] text-[#3fb950] font-bold text-[10px] sm:text-[11px] break-all">
                   {s.formula}
                 </span>
               </div>

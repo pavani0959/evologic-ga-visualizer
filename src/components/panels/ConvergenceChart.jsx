@@ -65,14 +65,14 @@ export function ConvergenceChart({ theme = 'dark', history }) {
   const latest = history[history.length - 1] || { best: 0, avg: 0, worst: 0, generation: 0 };
 
   return (
-    <div className="bg-[#161b22] rounded border border-[#30363d] p-3 text-xs flex flex-col">
+    <div className="bg-[#161b22] rounded border border-[#30363d] p-2.5 sm:p-3 text-xs flex flex-col">
       {/* Header */}
-      <div className="flex items-center justify-between pb-2 mb-1.5 border-b border-[#30363d]">
-        <div className="flex items-center gap-2">
-          <LineChart className="w-4 h-4 text-[#58a6ff]" />
+      <div className="flex flex-wrap items-center justify-between gap-2 pb-2 mb-1.5 border-b border-[#30363d]">
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          <LineChart className="w-4 h-4 text-[#58a6ff] flex-shrink-0" />
           <span className="font-bold text-[#f0f6fc]">Convergence Trajectory</span>
         </div>
-        <div className="flex items-center gap-3 text-[11px] font-mono">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-[10px] sm:text-[11px] font-mono">
           <span className="flex items-center gap-1 text-[#3fb950]">
             <span className="w-2 h-2 rounded-full bg-[#3fb950]"></span> Best: {latest.best}
           </span>
@@ -86,9 +86,9 @@ export function ConvergenceChart({ theme = 'dark', history }) {
       </div>
 
       {/* SVG Line Graph */}
-      <div className="relative flex-1 min-h-[140px] bg-[#0d1117] rounded border border-[#30363d] flex items-center justify-center p-2">
+      <div className="relative flex-1 min-h-[140px] bg-[#0d1117] rounded border border-[#30363d] flex items-center justify-center p-2 overflow-hidden">
         {history.length < 2 ? (
-          <div className="text-[#8b949e] text-center py-6 text-xs font-mono">
+          <div className="text-[#8b949e] text-center py-6 text-xs font-mono px-2">
             Execute at least 2 generations to observe fitness convergence across epochs.
           </div>
         ) : (

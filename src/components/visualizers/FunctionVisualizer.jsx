@@ -97,10 +97,10 @@ export function FunctionVisualizer({ theme = 'dark', gaState, isStoryMode }) {
   }, [problemId]);
 
   return (
-    <div className="flex flex-col h-full bg-[#161b22] rounded border border-[#30363d] p-3">
+    <div className="flex flex-col h-full bg-[#161b22] rounded border border-[#30363d] p-2.5 sm:p-3">
       {/* Top bar */}
-      <div className="flex flex-wrap items-center justify-between gap-2 pb-2.5 mb-2.5 border-b border-[#30363d] text-xs">
-        <div className="flex items-center gap-2">
+      <div className="flex flex-wrap items-center justify-between gap-2 pb-2 sm:pb-2.5 mb-2 sm:mb-2.5 border-b border-[#30363d] text-xs">
+        <div className="flex items-center gap-2 flex-wrap">
           <span className="font-semibold text-[#f0f6fc]">
             Landscape: {formulaLabel}
           </span>
@@ -109,19 +109,19 @@ export function FunctionVisualizer({ theme = 'dark', gaState, isStoryMode }) {
           </span>
         </div>
 
-        <div className="flex items-center gap-3 text-xs font-mono">
-          <div className="flex items-center gap-1.5 text-[#8b949e] bg-[#0d1117] px-2 py-0.5 rounded border border-[#30363d]">
+        <div className="flex items-center gap-2 sm:gap-3 text-xs font-mono flex-wrap">
+          <div className="flex items-center gap-1.5 text-[#8b949e] bg-[#0d1117] px-2 py-0.5 rounded border border-[#30363d] text-[11px]">
             <Target className="w-3.5 h-3.5 text-[#d29922]" />
             <span><strong className="text-[#d29922]">{targetLabel}</strong></span>
           </div>
-          <div className="bg-[#0d1117] border border-[#30363d] px-2 py-0.5 rounded text-[#f0f6fc]">
-            Current Best: <span className="text-[#3fb950] font-bold">x = {bestX} (f = {bestY})</span>
+          <div className="bg-[#0d1117] border border-[#30363d] px-2 py-0.5 rounded text-[#f0f6fc] text-[11px]">
+            Best: <span className="text-[#3fb950] font-bold">x = {bestX} (f = {bestY})</span>
           </div>
         </div>
       </div>
 
       {/* SVG Canvas Plot */}
-      <div className="relative flex-1 min-h-[310px] bg-[#0d1117] rounded border border-[#30363d] flex items-center justify-center">
+      <div className="relative flex-1 min-h-[260px] sm:min-h-[310px] bg-[#0d1117] rounded border border-[#30363d] flex items-center justify-center overflow-hidden">
         <svg viewBox={`0 0 ${svgWidth} ${svgHeight}`} className="w-full h-full max-h-[380px]">
           {/* Grid lines */}
           {xTicks.map(xVal => (
@@ -201,15 +201,15 @@ export function FunctionVisualizer({ theme = 'dark', gaState, isStoryMode }) {
         </svg>
 
         {/* Legend Overlay */}
-        <div className="absolute bottom-2.5 left-3 bg-[#161b22] border border-[#30363d] px-2.5 py-1 rounded text-[11px] font-mono text-[#8b949e] flex items-center gap-3">
+        <div className="absolute bottom-2 left-2 right-2 sm:left-3 sm:right-auto bg-[#161b22]/90 backdrop-blur-sm border border-[#30363d] px-2 py-1 rounded text-[10px] sm:text-[11px] font-mono text-[#8b949e] flex flex-wrap items-center gap-2 sm:gap-3 pointer-events-none">
           <span className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#3fb950]"></span> Current Best
+            <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-[#3fb950]"></span> Best
           </span>
           <span className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#8b949e]"></span> Population ({gaState.population?.length || 0})
+            <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-[#8b949e]"></span> Pop ({gaState.population?.length || 0})
           </span>
           <span className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#d29922]"></span> Optimum Peak
+            <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-[#d29922]"></span> Peak
           </span>
         </div>
       </div>

@@ -4,7 +4,7 @@ import { Scissors, ArrowDown, Zap, Sparkles } from 'lucide-react';
 export function CrossoverCinema({ crossoverRecord, mutationRecord, config }) {
   if (!crossoverRecord) {
     return (
-      <div className="flex flex-col items-center justify-center h-full p-8 text-center text-[#8b949e] bg-[#161b22] rounded-lg border border-[#30363d]">
+      <div className="flex flex-col items-center justify-center h-full p-6 sm:p-8 text-center text-[#8b949e] bg-[#161b22] rounded-lg border border-[#30363d]">
         <Scissors className="w-8 h-8 text-[#58a6ff] mb-2 animate-pulse" />
         <p className="text-xs font-bold text-[#f0f6fc]">Crossover & Mutation</p>
         <p className="text-[11px] text-[#8b949e] mt-1 max-w-sm">
@@ -21,16 +21,16 @@ export function CrossoverCinema({ crossoverRecord, mutationRecord, config }) {
   const firstMutation = hasMutations ? mutationRecord[0] : null;
 
   return (
-    <div className="bg-[#161b22] rounded-lg border border-[#30363d] p-3 text-xs flex flex-col gap-3">
+    <div className="bg-[#161b22] rounded-lg border border-[#30363d] p-2.5 sm:p-3 text-xs flex flex-col gap-3">
       {/* Header bar */}
-      <div className="flex items-center justify-between pb-2 border-b border-[#30363d]">
-        <div className="flex items-center gap-2">
-          <Scissors className="w-4 h-4 text-[#58a6ff]" />
+      <div className="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-[#30363d]">
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          <Scissors className="w-4 h-4 text-[#58a6ff] flex-shrink-0" />
           <span className="font-bold text-[#f0f6fc]">
             {method || 'Crossover Recombination'}
           </span>
         </div>
-        <span className="text-[11px] font-mono text-[#8b949e] bg-[#0d1117] px-2 py-0.5 rounded border border-[#30363d]">
+        <span className="text-[10px] sm:text-[11px] font-mono text-[#8b949e] bg-[#0d1117] px-2 py-0.5 rounded border border-[#30363d]">
           {point.point !== undefined
             ? `Cut Point k = ${point.point}`
             : point.mask
@@ -47,15 +47,15 @@ export function CrossoverCinema({ crossoverRecord, mutationRecord, config }) {
 
         {/* Parent 1 */}
         <div className="p-2 bg-[#0d1117] rounded border border-[#30363d]">
-          <div className="flex justify-between items-center text-[11px] mb-1 font-mono">
+          <div className="flex justify-between items-center text-[10px] sm:text-[11px] mb-1 font-mono">
             <span className="font-bold text-[#58a6ff]">Parent 1</span>
             <span className="text-[#8b949e]">Fitness: {parent1?.fitness ?? 0}</span>
           </div>
-          <div className="flex gap-1 overflow-x-auto pb-0.5 scrollbar-none font-mono">
+          <div className="flex gap-1 overflow-x-auto pb-0.5 scrollbar-none font-mono min-w-0 max-w-full">
             {parent1?.genes?.map((g, i) => {
               const isCut = point.point !== undefined ? i === point.point : point.mask ? point.mask[i] === 1 : i === point.start;
               return (
-                <div key={i} className="relative flex items-center">
+                <div key={i} className="relative flex items-center flex-shrink-0">
                   {isCut && (
                     <div className="absolute -left-0.5 top-0 bottom-0 w-1 bg-[#f85149] z-10 rounded-full" />
                   )}
@@ -70,15 +70,15 @@ export function CrossoverCinema({ crossoverRecord, mutationRecord, config }) {
 
         {/* Parent 2 */}
         <div className="p-2 bg-[#0d1117] rounded border border-[#30363d]">
-          <div className="flex justify-between items-center text-[11px] mb-1 font-mono">
+          <div className="flex justify-between items-center text-[10px] sm:text-[11px] mb-1 font-mono">
             <span className="font-bold text-[#d29922]">Parent 2</span>
             <span className="text-[#8b949e]">Fitness: {parent2?.fitness ?? 0}</span>
           </div>
-          <div className="flex gap-1 overflow-x-auto pb-0.5 scrollbar-none font-mono">
+          <div className="flex gap-1 overflow-x-auto pb-0.5 scrollbar-none font-mono min-w-0 max-w-full">
             {parent2?.genes?.map((g, i) => {
               const isCut = point.point !== undefined ? i === point.point : point.mask ? point.mask[i] === 0 : i === point.start;
               return (
-                <div key={i} className="relative flex items-center">
+                <div key={i} className="relative flex items-center flex-shrink-0">
                   {isCut && (
                     <div className="absolute -left-0.5 top-0 bottom-0 w-1 bg-[#f85149] z-10 rounded-full" />
                   )}
@@ -93,10 +93,10 @@ export function CrossoverCinema({ crossoverRecord, mutationRecord, config }) {
       </div>
 
       {/* Down arrow icon */}
-      <div className="flex items-center justify-center gap-2 py-0.5 text-xs text-[#8b949e] font-mono">
-        <ArrowDown className="w-3.5 h-3.5 text-[#3fb950]" />
-        <span>2 Parents Exchange DNA → Produce 2 Offspring</span>
-        <ArrowDown className="w-3.5 h-3.5 text-[#3fb950]" />
+      <div className="flex items-center justify-center gap-2 py-0.5 text-xs text-[#8b949e] font-mono text-center">
+        <ArrowDown className="w-3.5 h-3.5 text-[#3fb950] flex-shrink-0" />
+        <span className="text-[11px]">2 Parents Exchange DNA → Produce 2 Offspring</span>
+        <ArrowDown className="w-3.5 h-3.5 text-[#3fb950] flex-shrink-0" />
       </div>
 
       {/* OFFSPRING (Both Offspring 1 and Offspring 2) */}
@@ -108,11 +108,11 @@ export function CrossoverCinema({ crossoverRecord, mutationRecord, config }) {
         {/* Offspring 1 */}
         {child1 && (
           <div className="p-2 bg-[#0d1117] rounded border border-[#30363d]">
-            <div className="flex justify-between items-center text-[11px] mb-1 font-mono">
+            <div className="flex justify-between items-center text-[10px] sm:text-[11px] mb-1 font-mono">
               <span className="font-bold text-[#3fb950]">Offspring 1</span>
               <span className="text-[#8b949e]">Inherited: Parent 1 + Parent 2</span>
             </div>
-            <div className="flex gap-1 overflow-x-auto pb-0.5 scrollbar-none font-mono">
+            <div className="flex gap-1 overflow-x-auto pb-0.5 scrollbar-none font-mono min-w-0 max-w-full">
               {child1.genes.map((g, i) => {
                 const fromP1 = point.point !== undefined
                   ? i < point.point
@@ -122,7 +122,7 @@ export function CrossoverCinema({ crossoverRecord, mutationRecord, config }) {
                 return (
                   <span
                     key={i}
-                    className={`w-6 h-6 rounded border flex items-center justify-center font-bold text-xs ${
+                    className={`w-6 h-6 rounded border flex items-center justify-center font-bold text-xs flex-shrink-0 ${
                       fromP1
                         ? 'bg-[#161b22] border-[#1f6feb] text-[#58a6ff]'
                         : 'bg-[#161b22] border-[#d29922] text-[#d29922]'
@@ -140,11 +140,11 @@ export function CrossoverCinema({ crossoverRecord, mutationRecord, config }) {
         {/* Offspring 2 */}
         {child2 && (
           <div className="p-2 bg-[#0d1117] rounded border border-[#30363d]">
-            <div className="flex justify-between items-center text-[11px] mb-1 font-mono">
+            <div className="flex justify-between items-center text-[10px] sm:text-[11px] mb-1 font-mono">
               <span className="font-bold text-[#3fb950]">Offspring 2</span>
               <span className="text-[#8b949e]">Inherited: Parent 2 + Parent 1</span>
             </div>
-            <div className="flex gap-1 overflow-x-auto pb-0.5 scrollbar-none font-mono">
+            <div className="flex gap-1 overflow-x-auto pb-0.5 scrollbar-none font-mono min-w-0 max-w-full">
               {child2.genes.map((g, i) => {
                 const fromP2 = point.point !== undefined
                   ? i < point.point
@@ -154,7 +154,7 @@ export function CrossoverCinema({ crossoverRecord, mutationRecord, config }) {
                 return (
                   <span
                     key={i}
-                    className={`w-6 h-6 rounded border flex items-center justify-center font-bold text-xs ${
+                    className={`w-6 h-6 rounded border flex items-center justify-center font-bold text-xs flex-shrink-0 ${
                       fromP2
                         ? 'bg-[#161b22] border-[#d29922] text-[#d29922]'
                         : 'bg-[#161b22] border-[#1f6feb] text-[#58a6ff]'
@@ -172,13 +172,13 @@ export function CrossoverCinema({ crossoverRecord, mutationRecord, config }) {
 
       {/* MUTATION EVENT SHOWCASE */}
       {hasMutations && (
-        <div className="p-2.5 bg-[#0d1117] rounded border border-[#d29922]/50 flex items-center justify-between text-xs">
-          <div className="flex items-center gap-2">
-            <Zap className="w-4 h-4 text-[#d29922]" />
+        <div className="p-2.5 bg-[#0d1117] rounded border border-[#d29922]/50 flex flex-wrap items-center justify-between gap-2 text-xs">
+          <div className="flex items-center gap-2 flex-wrap">
+            <Zap className="w-4 h-4 text-[#d29922] flex-shrink-0" />
             <span className="text-[#f0f6fc] font-semibold">
               Random Mutation Event:
             </span>
-            <span className="text-[#8b949e]">
+            <span className="text-[#8b949e] text-[11px]">
               Perturbed {firstMutation?.mutatedPositions?.length || 1} gene position(s) at locus #{firstMutation?.mutatedPositions?.[0] ?? 0}
             </span>
           </div>

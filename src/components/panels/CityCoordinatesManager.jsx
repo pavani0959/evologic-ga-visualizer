@@ -17,14 +17,14 @@ export function CityCoordinatesManager({
   return (
     <div className="bg-[#161b22] border border-[#30363d] rounded-xl overflow-hidden shadow-sm transition-colors">
       {/* Collapsible Header */}
-      <div className="px-4 py-3 bg-[#1c2128] border-b border-[#30363d] flex items-center justify-between">
+      <div className="px-3 sm:px-4 py-2.5 sm:py-3 bg-[#1c2128] border-b border-[#30363d] flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <MapPin className="w-4 h-4 text-[#58a6ff]" />
+          <MapPin className="w-4 h-4 text-[#58a6ff] flex-shrink-0" />
           <span className="font-bold text-xs text-[#f0f6fc]">
             Edit City Locations (X, Y)
           </span>
           <span className="px-2 py-0.5 rounded-full bg-[#1f6feb]/20 text-[#58a6ff] text-[11px] font-mono font-semibold border border-[#1f6feb]/40">
-            {cities.length} Cities
+            {cities.length}
           </span>
         </div>
 
@@ -34,28 +34,28 @@ export function CityCoordinatesManager({
             className="flex items-center gap-1 text-[11px] text-[#8b949e] hover:text-[#f0f6fc] px-2 py-1 rounded bg-[#21262d] hover:bg-[#30363d] transition-colors cursor-pointer"
           >
             {isOpen ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
-            <span>{isOpen ? 'Collapse' : 'Edit (X, Y)'}</span>
+            <span className="hidden xs:inline sm:inline">{isOpen ? 'Collapse' : 'Edit (X, Y)'}</span>
           </button>
         </div>
       </div>
 
       {isOpen && (
-        <div className="p-3.5 space-y-3">
+        <div className="p-3 sm:p-3.5 space-y-3">
           {/* Action Bar */}
           <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
             <span className="text-[#8b949e] text-[11px]">
-              Type exact coordinates or click anywhere on the canvas below:
+              Type exact coordinates or click anywhere on canvas:
             </span>
 
             <div className="flex items-center gap-1.5 flex-wrap">
               <button
                 type="button"
                 onClick={onRandomize}
-                className="flex items-center gap-1 px-2.5 py-1 rounded bg-[#21262d] hover:bg-[#30363d] text-[#c9d1d9] border border-[#30363d] text-[11px] font-medium transition-colors cursor-pointer"
+                className="flex items-center gap-1 px-2 sm:px-2.5 py-1 rounded bg-[#21262d] hover:bg-[#30363d] text-[#c9d1d9] border border-[#30363d] text-[11px] font-medium transition-colors cursor-pointer"
                 title="Scatter cities to random coordinates"
               >
                 <Shuffle className="w-3 h-3 text-[#d29922]" />
-                <span>Randomize (8)</span>
+                <span>Randomize</span>
               </button>
 
               <button
@@ -65,17 +65,17 @@ export function CityCoordinatesManager({
                   const y = Math.round(50 + Math.random() * 260);
                   onAddCity(x, y);
                 }}
-                className="flex items-center gap-1 px-2.5 py-1 rounded bg-[#1f6feb] hover:bg-[#388bfd] text-white text-[11px] font-medium transition-colors cursor-pointer"
+                className="flex items-center gap-1 px-2 sm:px-2.5 py-1 rounded bg-[#1f6feb] hover:bg-[#388bfd] text-white text-[11px] font-medium transition-colors cursor-pointer"
                 title="Add a new city node"
               >
                 <Plus className="w-3 h-3" />
-                <span>+ Add City</span>
+                <span>+ City</span>
               </button>
 
               <button
                 type="button"
                 onClick={onResetDefault}
-                className="flex items-center gap-1 px-2.5 py-1 rounded bg-[#21262d] hover:bg-[#30363d] text-[#8b949e] hover:text-[#f85149] border border-[#30363d] text-[11px] font-medium transition-colors cursor-pointer"
+                className="flex items-center gap-1 px-2 sm:px-2.5 py-1 rounded bg-[#21262d] hover:bg-[#30363d] text-[#8b949e] hover:text-[#f85149] border border-[#30363d] text-[11px] font-medium transition-colors cursor-pointer"
                 title="Reset to default 8 Euclidean vertices"
               >
                 <RotateCcw className="w-3 h-3" />
@@ -86,34 +86,34 @@ export function CityCoordinatesManager({
 
           {/* Table of Cities */}
           <div className="overflow-x-auto max-h-[220px] overflow-y-auto border border-[#30363d] rounded-lg">
-            <table className="w-full text-left text-xs font-mono">
+            <table className="w-full text-left text-xs font-mono min-w-[320px]">
               <thead className="bg-[#1c2128] text-[#8b949e] text-[10px] uppercase border-b border-[#30363d] sticky top-0 z-10">
                 <tr>
-                  <th className="px-2.5 py-1.5 w-8">#</th>
-                  <th className="px-2.5 py-1.5">City Label</th>
-                  <th className="px-2.5 py-1.5 w-24">X (0-600)</th>
-                  <th className="px-2.5 py-1.5 w-24">Y (0-380)</th>
-                  <th className="px-2 py-1.5 w-10 text-center">Del</th>
+                  <th className="px-2 py-1.5 w-7 text-center">#</th>
+                  <th className="px-2 py-1.5">City Label</th>
+                  <th className="px-2 py-1.5 w-24">X (0-600)</th>
+                  <th className="px-2 py-1.5 w-24">Y (0-380)</th>
+                  <th className="px-1.5 py-1.5 w-8 text-center">Del</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#30363d]/50 bg-[#0d1117]">
                 {cities.map((city, idx) => (
                   <tr key={city.id ?? idx} className="hover:bg-[#161b22] transition-colors">
-                    <td className="px-2.5 py-1 text-[#8b949e] text-[11px]">
+                    <td className="px-2 py-1 text-[#8b949e] text-[11px] text-center">
                       {idx + 1}
                     </td>
 
-                    <td className="px-2.5 py-1">
+                    <td className="px-2 py-1">
                       <input
                         type="text"
                         value={city.label || `City ${idx + 1}`}
                         onChange={(e) => onUpdateLabel && onUpdateLabel(idx, e.target.value)}
-                        className="w-full bg-[#161b22] border border-[#30363d] rounded px-1.5 py-0.5 text-[#f0f6fc] text-xs font-sans focus:outline-none focus:border-[#58a6ff]"
+                        className="w-full min-w-[70px] bg-[#161b22] border border-[#30363d] rounded px-1.5 py-0.5 text-[#f0f6fc] text-xs font-sans focus:outline-none focus:border-[#58a6ff]"
                         maxLength={16}
                       />
                     </td>
 
-                    <td className="px-2.5 py-1">
+                    <td className="px-2 py-1">
                       <div className="flex items-center gap-1">
                         <span className="text-[10px] text-[#8b949e]">X:</span>
                         <input
@@ -122,12 +122,12 @@ export function CityCoordinatesManager({
                           max="620"
                           value={city.x}
                           onChange={(e) => onUpdateCoord && onUpdateCoord(idx, Number(e.target.value) || 0, city.y)}
-                          className="w-16 bg-[#161b22] border border-[#30363d] rounded px-1.5 py-0.5 text-[#3fb950] font-bold text-xs focus:outline-none focus:border-[#58a6ff]"
+                          className="w-14 sm:w-16 bg-[#161b22] border border-[#30363d] rounded px-1 py-0.5 text-[#3fb950] font-bold text-xs focus:outline-none focus:border-[#58a6ff]"
                         />
                       </div>
                     </td>
 
-                    <td className="px-2.5 py-1">
+                    <td className="px-2 py-1">
                       <div className="flex items-center gap-1">
                         <span className="text-[10px] text-[#8b949e]">Y:</span>
                         <input
@@ -136,18 +136,18 @@ export function CityCoordinatesManager({
                           max="400"
                           value={city.y}
                           onChange={(e) => onUpdateCoord && onUpdateCoord(idx, city.x, Number(e.target.value) || 0)}
-                          className="w-16 bg-[#161b22] border border-[#30363d] rounded px-1.5 py-0.5 text-[#58a6ff] font-bold text-xs focus:outline-none focus:border-[#58a6ff]"
+                          className="w-14 sm:w-16 bg-[#161b22] border border-[#30363d] rounded px-1 py-0.5 text-[#58a6ff] font-bold text-xs focus:outline-none focus:border-[#58a6ff]"
                         />
                       </div>
                     </td>
 
-                    <td className="px-2 py-1 text-center">
+                    <td className="px-1.5 py-1 text-center">
                       <button
                         type="button"
                         disabled={cities.length <= 4}
                         onClick={() => onRemoveCity && onRemoveCity(idx)}
                         className="text-[#8b949e] hover:text-[#f85149] disabled:opacity-20 disabled:hover:text-[#8b949e] p-1 rounded transition-colors cursor-pointer"
-                        title={cities.length <= 4 ? 'Minimum 4 cities required for tour' : `Delete ${city.label}`}
+                        title={cities.length <= 4 ? 'Minimum 4 cities required' : `Delete ${city.label}`}
                       >
                         <Trash2 className="w-3.5 h-3.5" />
                       </button>
@@ -162,4 +162,3 @@ export function CityCoordinatesManager({
     </div>
   );
 }
-

@@ -71,7 +71,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0d1117] text-[#e6edf3] flex flex-col font-sans selection:bg-[#1f6feb] selection:text-white transition-colors duration-150">
+    <div className="min-h-screen bg-[#0d1117] text-[#e6edf3] flex flex-col font-sans selection:bg-[#1f6feb] selection:text-white transition-colors duration-150 overflow-x-hidden">
       {/* 1. Navigation Bar with Custom Logo */}
       <Navbar
         activeView={activeView}
@@ -84,7 +84,7 @@ export default function App() {
       />
 
       {/* 2. Main Views (Simulator vs How It Works) */}
-      <main className="flex-1 flex flex-col">
+      <main className="flex-1 flex flex-col min-w-0">
         {activeView === 'workbench' && (
           <SimulatorSection
             theme={theme}
@@ -114,10 +114,10 @@ export default function App() {
         )}
 
         {activeView === 'blueprint' && (
-          <div className="max-w-6xl mx-auto py-6 px-4 sm:px-6 flex-1 w-full">
-            <div className="mb-6 pb-4 border-b border-[#30363d] flex flex-wrap items-center justify-between gap-3">
+          <div className="max-w-6xl mx-auto py-4 sm:py-6 px-3 sm:px-6 flex-1 w-full">
+            <div className="mb-4 sm:mb-6 pb-3 sm:pb-4 border-b border-[#30363d] flex flex-wrap items-center justify-between gap-3">
               <div>
-                <h1 className="text-xl sm:text-2xl font-bold text-[#f0f6fc]">
+                <h1 className="text-lg sm:text-2xl font-bold text-[#f0f6fc]">
                   Genetic Algorithm Lifecycle (7 Phases)
                 </h1>
               </div>
